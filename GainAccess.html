@@ -1,0 +1,26 @@
+<html>
+    <script src="https://myadp--fit.sandbox.my.site.com/lightningoutpoc/lightning/lightning.out.js"></script>
+    <div data-lightning-out="true"></div>
+    <script>
+        const appName = 'c:GenAIApp';
+        const componentName = 'c:genEmail';
+        const lightningEndpoint = 'https://myadp--fit.sandbox.my.site.com';
+        const targetElement = document.querySelector("[data-lightning-out]");
+        const componentAttributes = {};
+
+        $Lightning.use(
+            appName,
+            function () {
+                $Lightning.createComponent(
+                    componentName,
+                    componentAttributes,
+                    targetElement,
+                    function(cmp) {
+                        console.log(`lightning component created`);
+                    }
+                );
+            },
+            lightningEndpoint
+        );
+    </script>
+</html>
