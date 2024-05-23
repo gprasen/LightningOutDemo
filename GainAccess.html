@@ -1,26 +1,44 @@
+<!DOCTYPE html>
 <html>
-    <script src="https://myadp--fit.sandbox.my.site.com/lightningoutpoc/lightning/lightning.out.js"></script>
-    <div data-lightning-out="true"></div>
+<head>
     <script>
-        const appName = 'c:GenAIApp';
-        const componentName = 'c:genEmail';
-        const lightningEndpoint = 'https://myadp--fit.sandbox.my.site.com';
-        const targetElement = document.querySelector("[data-lightning-out]");
-        const componentAttributes = {};
+        function loadLightningOut() {
+            const script = document.createElement('script');
+            script.src = "https://myadp--fit.sandbox.my.site.com/lightningoutpoc/lightning/lightning.out.js";
+            script.onload = initializeLightningOut;
+            script.onerror = function() {
+                console.error('Failed to load Lightning Out script.');
+            };
+            document.head.appendChild(script);
+        }
 
-        $Lightning.use(
-            appName,
-            function () {
-                $Lightning.createComponent(
-                    componentName,
-                    componentAttributes,
-                    targetElement,
-                    function(cmp) {
-                        console.log(`lightning component created`);
-                    }
-                );
-            },
-            lightningEndpoint
-        );
+        function initializeLightningOut() {
+            const appName = 'c:GenAIApp';
+            const componentName = 'c:genEmail';
+            const lightningEndpoint = 'https://myadp--fit.sandbox.my.site.com';
+            const targetElement = document.querySelector("[data-lightning-out]");
+            const componentAttributes = {};
+
+            $Lightning.use(
+                appName,
+                function() {
+                    $Lightning.createComponent(
+                        componentName,
+                        componentAttributes,
+                        targetElement,
+                        function(cmp) {
+                            console.log('Lightning component created');
+                        }
+                    );
+                },
+                lightningEndpoint
+            );
+        }
+
+        document.addEventListener("DOMContentLoaded", loadLightningOut);
     </script>
+</head>
+<body>
+    <div data-lightning-out="true"></div>
+</body>
 </html>
