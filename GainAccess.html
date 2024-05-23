@@ -6,7 +6,7 @@
             script.src = "https://myadp--fit.sandbox.my.site.com/lightningoutpoc/lightning/lightning.out.js";
             script.onload = initializeLightningOut;
             script.onerror = function() {
-                console.error('Failed to load Lightning Out script.');
+                console.error('Failed to load Lightning Out script from', script.src);
             };
             document.head.appendChild(script);
         }
@@ -17,6 +17,11 @@
             const lightningEndpoint = 'https://myadp--fit.sandbox.my.site.com';
             const targetElement = document.querySelector("[data-lightning-out]");
             const componentAttributes = {};
+
+            if (typeof $Lightning === 'undefined') {
+                console.error('$Lightning is not defined. Ensure the script URL is correct and accessible.');
+                return;
+            }
 
             $Lightning.use(
                 appName,
